@@ -1,8 +1,8 @@
 import 'dart:io';
+import 'package:editor/layout/explorer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:editor/explorer/explorer.dart';
 import 'package:editor/services/ffi/bridge.dart';
 import 'package:editor/services/app.dart';
 import 'package:editor/services/highlight/theme.dart';

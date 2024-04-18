@@ -137,7 +137,7 @@ class Explorer implements ExplorerListener {
     return loadPath(p, recursive: true);
   }
 
-  Future<bool> loadPath(String path, {bool recursive: false}) {
+  Future<bool> loadPath(String path, {bool recursive = false}) {
     String p = _path.normalize(Directory(path).absolute.path);
     if (isLoading(p)) {
       _busy();
@@ -155,7 +155,7 @@ class Explorer implements ExplorerListener {
     return root?.itemFromPath(p);
   }
 
-  Future<bool> deleteDirectory(String path, {bool recursive: false}) {
+  Future<bool> deleteDirectory(String path, {bool recursive = false}) {
     String p = _path.normalize(Directory(path).absolute.path);
     if (isLoading(p)) {
       _busy();

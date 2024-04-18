@@ -2,7 +2,7 @@ import 'dart:ffi';
 import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
-class ThemeColor extends Struct {
+final class ThemeColor extends Struct {
   @Int8()
   external int r;
   @Int8()
@@ -11,7 +11,7 @@ class ThemeColor extends Struct {
   external int b;
 }
 
-class ThemeInfo extends Struct {
+final class ThemeInfo extends Struct {
   @Int8()
   external int r;
   @Int8()
@@ -32,7 +32,7 @@ class ThemeInfo extends Struct {
   external int sel_b;
 }
 
-class TextSpanStyle extends Struct {
+final class TextSpanStyle extends Struct {
   @Int32()
   external int start;
   @Int32()

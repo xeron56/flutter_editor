@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:editor/editor/decorations.dart';
 import 'package:editor/editor/cursor.dart';
 import 'package:editor/editor/document.dart';
-import 'package:editor/editor/view.dart';
+import 'package:editor/editor/view.dart' as viewlib;
 import 'package:editor/editor/search.dart';
 import 'package:editor/editor/minimap.dart';
 import 'package:editor/services/app.dart';
@@ -468,7 +468,7 @@ class _Editor extends State<Editor> with WidgetsBindingObserver {
   }
 
   void onTapDown(RenderObject? obj, Offset globalPosition) {
-    Offset o = screenToCursor(obj, globalPosition);
+    Offset o = viewlib.screenToCursor(obj, globalPosition);
     if (shifting) {
       command('shift+cursor', params: [o.dy.toInt(), o.dx.toInt()]);
     } else {
@@ -478,14 +478,14 @@ class _Editor extends State<Editor> with WidgetsBindingObserver {
 
   void onDoubleTapDown(RenderObject? obj, Offset globalPosition) {
     Document d = doc.doc;
-    Offset o = screenToCursor(obj, globalPosition);
+    Offset o = viewlib.screenToCursor(obj, globalPosition);
     command('cursor', params: [o.dy.toInt(), o.dx.toInt()]);
     command('select_word');
   }
 
   void onPanUpdate(RenderObject? obj, Offset globalPosition) {
     Document d = doc.doc;
-    Offset o = screenToCursor(obj, globalPosition);
+    Offset o = viewlib.screenToCursor(obj, globalPosition);
     if (o.dx == -1 || o.dy == -1) return;
     command('shift+cursor', params: [o.dy.toInt(), o.dx.toInt()]);
   }
@@ -606,7 +606,7 @@ class _Editor extends State<Editor> with WidgetsBindingObserver {
                     Expanded(
                         child: InputListener(
                             child:
-                                View(key: PageStorageKey(doc.doc.documentId)),
+                                viewlib.View(key: PageStorageKey(doc.doc.documentId)),
                             focusNode: focusNode,
                             textFocusNode: textFocusNode,
                             onKeyDown: onKeyDown,

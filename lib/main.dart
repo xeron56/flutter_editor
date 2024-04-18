@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:path/path.dart' as _path;
 
@@ -18,6 +20,12 @@ import 'package:editor/services/keybindings.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  //checking if the platform is android then check for run time file access permission
+  if (Platform.isAndroid) {
+    await Permission.storage.request();
+  }
+  
 
   AppProvider app = AppProvider.instance();
   await app.initialize();
@@ -25,7 +33,11 @@ void main(List<String> args) async {
 
   FFIBridge.load();
 
-  String path = './';
+  final internalDir = await getExternalStorageDirectory();
+
+  String path = internalDir!.path;
+
+  //String path = './';
   if (args.isNotEmpty) {
     path = args[0];
   }
